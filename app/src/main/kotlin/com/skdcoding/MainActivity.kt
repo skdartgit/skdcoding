@@ -1553,6 +1553,9 @@ class MainActivity : AppCompatActivity() {
 
         content.removeAllViews()
 
+        // The complete code-view page is wrapped in one vertical ScrollView.
+        // This lets the title, description, and original code scroll together,
+        // so long descriptions can never hide the code section below them.
         val page =
             LinearLayout(this).apply {
 
@@ -1568,6 +1571,21 @@ class MainActivity : AppCompatActivity() {
 
                 setBackgroundColor(
                     bg
+                )
+            }
+
+        val pageScroll =
+            ScrollView(this).apply {
+
+                isFillViewport =
+                    true
+
+                addView(
+                    page,
+                    ViewGroup.LayoutParams(
+                        -1,
+                        -2
+                    )
                 )
             }
 
@@ -1822,28 +1840,23 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
-        val vs =
-            ScrollView(this).apply {
-
-                addView(
-                    hs,
-                    ViewGroup.LayoutParams(
-                        -1,
-                        -1
-                    )
-                )
-            }
-
+        // Keep horizontal scrolling for long code lines, while the outer
+        // pageScroll handles all vertical scrolling for the entire code page.
         page.addView(
-            vs,
+            hs,
             LinearLayout.LayoutParams(
                 -1,
-                0,
-                1f
+                -2
             )
         )
 
-        content.addView(page)
+        content.addView(
+            pageScroll,
+            FrameLayout.LayoutParams(
+                -1,
+                -1
+            )
+        )
     }
 
     private fun label(
