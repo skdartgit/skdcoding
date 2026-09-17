@@ -1078,31 +1078,10 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
-        // Keep the formatting controls below the description editor.
-        // This prevents Android's native text-selection toolbar
-        // (Select all / Cut / Copy / Paste) from covering B and U.
         val bold =
             Button(this).apply {
 
                 text = "B"
-
-                textSize = 15f
-
-                typeface =
-                    Typeface.DEFAULT_BOLD
-
-                isAllCaps = false
-
-                minHeight = 0
-
-                minimumHeight = 0
-
-                setPadding(
-                    0,
-                    0,
-                    0,
-                    0
-                )
 
                 setOnClickListener {
                     toggleStyle(
@@ -1116,24 +1095,6 @@ class MainActivity : AppCompatActivity() {
             Button(this).apply {
 
                 text = "U"
-
-                textSize = 15f
-
-                typeface =
-                    Typeface.DEFAULT_BOLD
-
-                isAllCaps = false
-
-                minHeight = 0
-
-                minimumHeight = 0
-
-                setPadding(
-                    0,
-                    0,
-                    0,
-                    0
-                )
 
                 setOnClickListener {
                     toggleStyle(
@@ -1151,13 +1112,6 @@ class MainActivity : AppCompatActivity() {
 
                 gravity =
                     Gravity.CENTER_VERTICAL
-
-                setPadding(
-                    0,
-                    dp(4),
-                    0,
-                    dp(4)
-                )
             }
 
         formatRow.addView(
@@ -1194,7 +1148,7 @@ class MainActivity : AppCompatActivity() {
                 dp(48),
                 dp(40)
             ).apply {
-                marginStart = dp(6)
+                marginStart = dp(4)
             }
         )
 
@@ -1289,7 +1243,7 @@ class MainActivity : AppCompatActivity() {
 
                 addView(
                     codeEdit,
-                    ViewGroup.LayoutParams(
+                    HorizontalScrollView.LayoutParams(
                         -1,
                         -2
                     )
@@ -1413,20 +1367,14 @@ class MainActivity : AppCompatActivity() {
                 )
 
                 addView(
+                    formatRow
+                )
+
+                addView(
                     descriptionEdit,
                     LinearLayout.LayoutParams(
                         -1,
                         dp(118)
-                    )
-                )
-
-                // Formatting toolbar is deliberately AFTER the description
-                // editor and immediately BEFORE the Original Code section.
-                addView(
-                    formatRow,
-                    LinearLayout.LayoutParams(
-                        -1,
-                        dp(48)
                     )
                 )
 
@@ -1577,14 +1525,9 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val editable =
-            edit.text
-
         if (bold) {
 
-            // Apply a real StyleSpan to the selected range.
-            // Html.toHtml() below will persist this as bold HTML.
-            editable.setSpan(
+            edit.text.setSpan(
                 StyleSpan(
                     Typeface.BOLD
                 ),
@@ -1595,20 +1538,13 @@ class MainActivity : AppCompatActivity() {
 
         } else {
 
-            // Apply a real UnderlineSpan to the selected range.
-            // Html.toHtml() below will persist this as underlined HTML.
-            editable.setSpan(
+            edit.text.setSpan(
                 UnderlineSpan(),
                 start,
                 end,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
-
-        // Keep the selected text selected after pressing B/U so the user
-        // can immediately apply the other formatting button as well.
-        edit.requestFocus()
-        edit.setSelection(start, end)
     }
 
     private fun showCodeViewer(
@@ -1879,7 +1815,7 @@ class MainActivity : AppCompatActivity() {
 
                 addView(
                     codeText,
-                    ViewGroup.LayoutParams(
+                    HorizontalScrollView.LayoutParams(
                         -1,
                         -2
                     )
@@ -1891,7 +1827,7 @@ class MainActivity : AppCompatActivity() {
 
                 addView(
                     hs,
-                    ViewGroup.LayoutParams(
+                    ScrollView.LayoutParams(
                         -1,
                         -1
                     )
