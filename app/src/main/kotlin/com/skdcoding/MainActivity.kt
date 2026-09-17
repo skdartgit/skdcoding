@@ -1869,6 +1869,14 @@ class MainActivity : AppCompatActivity() {
                     }
             }
 
+        // The opened-code screen uses ONE vertical ScrollView for the
+        // complete page: title + description + original code.
+        //
+        // Do not put the code inside a second vertical ScrollView. A nested
+        // vertical scroller can consume the scroll gesture and make the
+        // original code unreachable when the description is long.
+        // The HorizontalScrollView below is horizontal-only, so vertical
+        // scrolling remains owned by the outer page ScrollView.
         val hs =
             HorizontalScrollView(
                 this
@@ -1880,34 +1888,42 @@ class MainActivity : AppCompatActivity() {
                 addView(
                     codeText,
                     ViewGroup.LayoutParams(
+                        -2,
+                        -2
+                    )
+                )
+            }
+
+        page.addView(
+            hs,
+            LinearLayout.LayoutParams(
+                -1,
+                -2
+            )
+        )
+
+        val pageScroll =
+            ScrollView(this).apply {
+
+                isFillViewport =
+                    true
+
+                addView(
+                    page,
+                    ViewGroup.LayoutParams(
                         -1,
                         -2
                     )
                 )
             }
 
-        val vs =
-            ScrollView(this).apply {
-
-                addView(
-                    hs,
-                    ViewGroup.LayoutParams(
-                        -1,
-                        -1
-                    )
-                )
-            }
-
-        page.addView(
-            vs,
-            LinearLayout.LayoutParams(
+        content.addView(
+            pageScroll,
+            FrameLayout.LayoutParams(
                 -1,
-                0,
-                1f
+                -1
             )
         )
-
-        content.addView(page)
     }
 
     private fun label(
