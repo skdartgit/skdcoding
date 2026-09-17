@@ -1243,7 +1243,7 @@ class MainActivity : AppCompatActivity() {
 
                 addView(
                     codeEdit,
-                    HorizontalScrollView.LayoutParams(
+                    ViewGroup.LayoutParams(
                         -1,
                         -2
                     )
@@ -1815,7 +1815,7 @@ class MainActivity : AppCompatActivity() {
 
                 addView(
                     codeText,
-                    HorizontalScrollView.LayoutParams(
+                    ViewGroup.LayoutParams(
                         -1,
                         -2
                     )
@@ -1827,7 +1827,7 @@ class MainActivity : AppCompatActivity() {
 
                 addView(
                     hs,
-                    ScrollView.LayoutParams(
+                    ViewGroup.LayoutParams(
                         -1,
                         -1
                     )
