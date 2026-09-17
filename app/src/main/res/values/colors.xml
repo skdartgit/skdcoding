@@ -1,0 +1,7 @@
+<resources>
+    <color name="reading_background">#FFF8E7</color>
+    <color name="reading_surface">#FFFDF5</color>
+    <color name="reading_text">#3E3A32</color>
+    <color name="reading_muted">#766F63</color>
+    <color name="accent">#5B4B8A</color>
+</resources>

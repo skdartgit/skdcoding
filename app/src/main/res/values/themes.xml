@@ -1,0 +1,11 @@
+<resources>
+    <style name="Theme.Skdcoding" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/reading_background</item>
+        <item name="android:navigationBarColor">@color/reading_background</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>
